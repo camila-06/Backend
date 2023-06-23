@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-const path = '../files/products.json'
+const path = 'products.json'
 
 // Realizar una clase "ProductManager" que gestione un conjunto de productos
 export default class ProductManager{
