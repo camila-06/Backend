@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Luckiest+Guy&family=Mandali&family=Titan+One&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Mandali", sans-serif;
+}
+body {
+    background-color: #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FORMS */
+
+#forms{
+    margin: 45px;
+    margin-bottom: 0;
+}
+#addProductForm, #deleteProductForm {
+    width: 400px;
+    background-color: #270570;
+    color: #ffffff;
+    padding: 30px;
+    margin: auto;
+    margin-bottom: 45px;
+    border-radius: 4px;
+    box-shadow: 7px 13px 37px #000;
+}
+#addProductForm h2, #deleteProductForm h2 {
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 10px;
+}
+.controls {
+    width: 100%;
+    background: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid silver;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: #000;
+}
+.botons {
+    width: 100%;
+    background: #fa503f;
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    padding: 12px;
+    margin: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* PRODUCTS */
+#productsList{
+    margin: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 28px;
+    grid-auto-rows: auto;
+}
+.container {
+    position: relative;
+}
+.container .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 320px;
+    height: 400px;
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid #DDE1E8;
+}
+.container .card .content {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding: 15px;
+}
+.container .card .content h3 {
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000;
+}
+.container .card .content .description, .container .card .content .price {
+    width: 100%;
+    padding: 8px 20px;
+    border-bottom: 1px solid #DDE1E8;
+}
+.container .card .content .id{
+    margin: 10px;
+}
+.container .card .content .description h4, .container .card .content .price h4 {
+    color: #000;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-right: 10px;
+}
+.container .card .content p, .container .card .content p {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+.container .card .content a {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #270570;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #ffffff;
+}

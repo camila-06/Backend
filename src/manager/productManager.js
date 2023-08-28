@@ -32,6 +32,7 @@ export default class ProductManager{
     
     addProduct = async (newProduct) => {
         try{
+            newProduct.status = true;
             const products = await this.getProducts();
 
             if (products.length === 0){
@@ -58,12 +59,12 @@ export default class ProductManager{
         }
     }
 
-    updateProduct = async (id, title, description, code, price, status, stock, category) =>{
+    updateProduct = async (id, title, description, code, price, stock, category, status) =>{
         try{
             const products = await this.getProducts();
             const idx = products.findIndex(product => product.id === id)
             if (idx < 0) return 
-            products[idx] = {id, title, description, code, price, status, stock, category}
+            products[idx] = {id, title, description, code, price, stock, category, status}
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"), 'utf-8')
         }
         catch (error){
