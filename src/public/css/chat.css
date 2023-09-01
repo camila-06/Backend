@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Luckiest+Guy&family=Mandali&family=Titan+One&display=swap");
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
+}
+
+#chat-container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #270570;
+    color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 7px 13px 37px #000;
+}
+
+#chatbox {
+    height: 500px;
+    width: 100%;
+    background: #ffffff;
+    overflow-y: scroll;
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.messageLogs-container {
+    background-color: #FFE3E0;
+    color: #000;
+    padding: 8px;
+}
+
+#form {
+    margin-top: 10px;
+    display: flex;
+}
+
+#message{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+#send {
+    margin-left: 10px;
+    background-color: #fa503f;
+    color: #ffffff;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#send:hover {
+    background-color: #e12b19;
+}
