@@ -122,3 +122,30 @@ body {
     font-weight: 600;
     color: #ffffff;
 }
+
+/* CARTS */
+#cart{
+    margin: 20px;
+    background: #FFE3E0;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cart h2{
+    margin: 10px;
+    text-align: center;
+    color: #270570;
+}
+
+#delete-cart{
+    text-align: center;
+    padding: 10px 30px;
+    background: #fa503f;
+    border-radius: 4px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #ffffff;
+}

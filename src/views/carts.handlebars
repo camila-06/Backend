@@ -1,0 +1,27 @@
+<section>
+    <div id="cart">
+        <h2>Cart ID: {{cartId}}</h2>
+        <div id="productsList">
+            {{#each products}}
+                <div class="container">
+                    <div class="card">
+                        <div class="content">
+                            <h3>{{title}}</h3>
+                            <div class="description">
+                                <h4>Quantity: {{quantity}}</h4>
+                            </div>
+                            <div class="price">
+                                <h4>${{price}}</h4>
+                            </div>
+                            <div class="id">
+                                <p>ID product: {{id}}</p>
+                            </div>
+                            <a href="#">Delete product</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <a id="delete-cart" href="#">Delete Cart</a>
+    </div>
+</section>
