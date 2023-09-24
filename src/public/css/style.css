@@ -9,8 +9,25 @@ body {
     background-color: #eee;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+header {
+    height: 50px;
+    width: 100%;
+}
+.navbar{
+    height: 50px;
+    width: 100%;
+}
+.navbar-brand{
+    color: #000;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.navbar-collapse{
+    justify-content: right;
 }
 
 /* FORMS */
@@ -19,7 +36,7 @@ body {
     margin: 45px;
     margin-bottom: 0;
 }
-#addProductForm, #deleteProductForm {
+#addProductForm, #deleteProductForm, #registerForm, #loginForm {
     width: 400px;
     background-color: #270570;
     color: #ffffff;
@@ -35,6 +52,12 @@ body {
     font-size: 20px;
     line-height: 10px;
 }
+
+#registerForm h2, #loginForm h2 {
+    height: 40px;
+    text-align: center;
+    line-height: 10px;
+}
 .controls {
     width: 100%;
     background: #eee;
@@ -46,7 +69,7 @@ body {
     font-size: 18px;
     color: #000;
 }
-.botons {
+.buttons {
     width: 100%;
     background: #fa503f;
     color: white;
@@ -124,7 +147,7 @@ body {
 }
 
 /* CARTS */
-#cart{
+#cart, #error{
     margin: 20px;
     background: #FFE3E0;
     border-radius: 30px;

@@ -2,15 +2,19 @@ import { Router } from "express";
 import ProductManager from '../dao/managerMongo/productManagerMongo.js';
 import CartManager from "../dao/managerMongo/cartManagerMongo.js";
 import productModel from "../dao/models/products.model.js";
+import is_admin from '../middlewares/is_admin.js';
 
 const router = Router();
 
 const productManager = new ProductManager();
 const cartManager = new CartManager();
 
+
 router.get('/', async (req,res)=>{
     const products = await productManager.getProducts();
-    res.render('home', {products})
+    const user = req.session.user;
+    const photo = req.session.photo;
+    res.render('login', {products, user, photo})
 });
 
 router.get('/products', async (req,res)=>{
@@ -56,11 +60,17 @@ router.get('/products', async (req,res)=>{
     if ((page > products.totalPages) || (page < 0)){
         return res.status(400).send({status: 'error', error: 'page not found'})
     }
-    res.render('products', {products, prevLink, nextLink})
+    const user = req.session.user;
+    const role = req.session.role;
+    const photo = req.session.photo;
+    res.render('products', {products, prevLink, nextLink, user, role, photo})
 });
 
-router.get('/realTimeProducts', (req,res)=>{
-    res.render('realTimeProducts')
+router.get('/realTimeProducts', is_admin, async (req,res)=>{
+    const user = req.session.user;
+    const role = req.session.role;
+    const photo = req.session.photo;
+    res.render('realTimeProducts', {user, role, photo})
 });
 
 router.get('/carts/:cid', async (req,res)=>{
@@ -77,11 +87,22 @@ router.get('/carts/:cid', async (req,res)=>{
             price: product.product.price
         }
     })
-    res.render('carts', {cart, cartId, products})
+    const user = req.session.user;
+    const role = req.session.role;
+    const photo = req.session.photo;
+    res.render('carts', {cart, cartId, products, user, role, photo})
 })
 
 router.get('/chat', (req,res)=>{
     res.render('chat')
+})
+
+router.get('/login', (req,res)=>{
+    res.render('login')
+})
+
+router.get('/register', (req,res)=>{
+    res.render('register')
 })
 
 export default router;

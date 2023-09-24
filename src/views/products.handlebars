@@ -1,5 +1,5 @@
 <section id="products">
-    <h1>List of products:</h1>
+    <h1>¡Bienvenido/a {{user}}!</h1>
     <div id="productsList">
         {{#each products.docs}}
         <div class="container">
@@ -25,10 +25,10 @@
     </div>
     <div>
         {{#if products.hasPrevPage}}
-            <a class="botons" href={{prevLink}}>Previous</a>
+            <a class="buttons" href={{prevLink}}>Previous</a>
         {{/if}}
         {{#if products.hasNextPage}}
-            <a class="botons" href={{nextLink}}>Next</a>
+            <a class="buttons" href={{nextLink}}>Next</a>
         {{/if}}
     </div>
 </section>

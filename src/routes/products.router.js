@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProductManager from "../dao/managerMongo/productManagerMongo.js";
-import productModel from "../dao/models/products.model.js"
+import productModel from "../dao/models/products.model.js";
+import is_admin from '../middlewares/is_admin.js';
 const router = Router();
 
 const productManager = new ProductManager();
@@ -60,13 +61,20 @@ router.get('/:pid', async (req,res)=>{
     res.send({status: 'success', productId})
 })
 
-router.post('/', async(req,res)=>{
-    const newProduct = req.body;
-    if (!newProduct.title || !newProduct.description || !newProduct.code || !newProduct.price || !newProduct.stock || !newProduct.category){
-        return res.status(400).send({error: 'incomplete values'})
+router.post('/', is_admin, async(req,res,next)=>{
+    try{
+        const newProduct = req.body;
+        if (!newProduct.title || !newProduct.description || !newProduct.code || !newProduct.price || !newProduct.stock || !newProduct.category){
+            return res.status(400).send({error: 'incomplete values'})
+        }
+        await productManager.addProduct(newProduct)
+        return res.status(201).json({
+            success: true, 
+            message: 'product added'
+        })
+    }catch(error){
+        next(error)
     }
-    await productManager.addProduct(newProduct)
-    res.send({status: 'success', message: 'product added'})
 })
 
 router.put('/:pid', async (req,res)=>{

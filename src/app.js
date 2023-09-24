@@ -1,42 +1,56 @@
+import 'dotenv/config.js'
 import express from "express";
 import { connect } from "mongoose";
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import __dirname from "./utils.js";
 import handlebars from "express-handlebars";
 import viewsRouter from './routes/views.router.js';
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
+import authRouter from './routes/auth.router.js';
 import ProductManager from "./dao/managerMongo/productManagerMongo.js";
 import MessageManager from "./dao/managerMongo/messageManagerMongo.js";
 import { Server } from "socket.io";
 
-
-const PORT = 8080;
-const ready = async () =>{
-    console.log('Listening on port '+PORT)
-    await connect('mongodb+srv://cami:1234@care.8al6fy8.mongodb.net/ecommerce?retryWrites=true&w=majority')
-        .then(()=>console.log('database connected'))
-        .catch(err=>console.log(err))
-}
-
-const productManager = new ProductManager();
-const messageManager = new MessageManager();
 const app = express();
 
+app.use(cookieParser(process.env.SECRET_COOKIE))
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: process.env.LINK_DB,
+        ttl:60*60*24*7
+    }),
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true
+}))
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
+app.use('/api/auth', authRouter);
 app.use('/', viewsRouter);
-
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 app.use(express.static(`${__dirname}/public`));
 
+const PORT = process.env.PORT;
+const ready = async () =>{
+    console.log('Listening on port '+PORT)
+    await connect(process.env.LINK_DB)
+        .then(()=>console.log('database connected'))
+        .catch(err=>console.log(err))
+}
+
 const server = app.listen(PORT, ready);
 
 const socketServer = new Server(server);
+
+const productManager = new ProductManager();
+const messageManager = new MessageManager();
 
 socketServer.on('connection', async (socket)=>{
     console.log('client connected with ID:', socket.id)
