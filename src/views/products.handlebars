@@ -1,5 +1,23 @@
+<h1>Products</h1>
+<section id="forms">
+    <form id="addProductForm">
+        <h2>Add new product</h2>
+        <input class="controls" type="text" name="title" id="title" placeholder="Title" required>
+        <input class="controls" type="text" name="description" id="description" placeholder="Description" required>
+        <input class="controls" type="text" name="code" id="code" placeholder="Code" required>
+        <input class="controls" type="number" name="price" id="price" placeholder="Price" required>
+        <input class="controls" type="number" name="stock" id="stock" placeholder="Stock" required>
+        <input class="controls" type="text" name="category" id="category" placeholder="Category" required>
+        <button class="buttons" type="submit" id="add" >Add product</button>
+    </form>
+
+    <form id="deleteProductForm">
+        <h2>Delete product</h2>
+        <input class="controls" type="string" name="prodId" id="prodId" placeholder="Product ID" >
+        <button class="buttons" type="submit" id="delete">Delete</button>
+    </form>
+</section>
 <section id="products">
-    <h1>¡Bienvenido/a {{user}}!</h1>
     <div id="productsList">
         {{#each products.docs}}
         <div class="container">
@@ -32,4 +50,5 @@
         {{/if}}
     </div>
 </section>
+
 <script src="/js/products.js"></script>

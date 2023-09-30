@@ -1,8 +1,9 @@
 <section id="forms">
     <form action="/api/auth/login" method="POST" id="loginForm">
-        <h2>Sign in to My Account</h2>
+        <h2>Log in to My Account</h2>
         <input class="controls" type="email" name="mail" id="mail" placeholder="Mail" required>
         <input class="controls" type="password" name="password" id="password" placeholder="Password" required>
-        <button class="buttons" type="submit" id="login">Sign in</button>
+        <button class="buttons" type="submit" id="login">Log in with your email</button>
+        <button class="buttons"><a href="/api/auth/github">Log in with Github</a></button>
     </form>
 </section>

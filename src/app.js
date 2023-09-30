@@ -4,6 +4,8 @@ import { connect } from "mongoose";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import inicializePassport from './middlewares/passport.js';
+import passport from 'passport';
 import __dirname from "./utils.js";
 import handlebars from "express-handlebars";
 import viewsRouter from './routes/views.router.js';
@@ -26,7 +28,12 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+inicializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
+
 app.use(express.urlencoded({extended: true}));
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);

@@ -2,6 +2,7 @@ import { Router } from "express";
 import ProductManager from "../dao/managerMongo/productManagerMongo.js";
 import productModel from "../dao/models/products.model.js";
 import is_admin from '../middlewares/is_admin.js';
+import verify_token from "../middlewares/verify_token.js";
 const router = Router();
 
 const productManager = new ProductManager();
@@ -61,7 +62,7 @@ router.get('/:pid', async (req,res)=>{
     res.send({status: 'success', productId})
 })
 
-router.post('/', is_admin, async(req,res,next)=>{
+router.post('/', verify_token, is_admin, async(req,res,next)=>{
     try{
         const newProduct = req.body;
         if (!newProduct.title || !newProduct.description || !newProduct.code || !newProduct.price || !newProduct.stock || !newProduct.category){

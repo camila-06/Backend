@@ -3,6 +3,7 @@ import ProductManager from '../dao/managerMongo/productManagerMongo.js';
 import CartManager from "../dao/managerMongo/cartManagerMongo.js";
 import productModel from "../dao/models/products.model.js";
 import is_admin from '../middlewares/is_admin.js';
+import is_valid_pass from "../middlewares/is_valid_pass.js";
 
 const router = Router();
 
@@ -11,13 +12,18 @@ const cartManager = new CartManager();
 
 
 router.get('/', async (req,res)=>{
-    const products = await productManager.getProducts();
-    const user = req.session.user;
-    const photo = req.session.photo;
-    res.render('login', {products, user, photo})
+    res.render('login')
 });
 
-router.get('/products', async (req,res)=>{
+router.get('/home', async(req,res)=>{
+    const products = await productManager.getProducts();
+    const user = req.user.name;
+    const role = req.user.role;
+    const photo = req.user.photo;
+    res.render('home', {products, user, role, photo})
+})
+
+router.get('/products', is_admin, async (req,res)=>{
     let limit = parseInt(req.query.limit) || 10;
     let page = parseInt(req.query.page) || 1;
     let query = req.query.query;
@@ -60,16 +66,16 @@ router.get('/products', async (req,res)=>{
     if ((page > products.totalPages) || (page < 0)){
         return res.status(400).send({status: 'error', error: 'page not found'})
     }
-    const user = req.session.user;
-    const role = req.session.role;
-    const photo = req.session.photo;
+    const user = req.user.name;
+    const role = req.user.role;
+    const photo = req.user.photo;
     res.render('products', {products, prevLink, nextLink, user, role, photo})
 });
 
 router.get('/realTimeProducts', is_admin, async (req,res)=>{
-    const user = req.session.user;
-    const role = req.session.role;
-    const photo = req.session.photo;
+    const user = req.user.name;
+    const role = req.user.role;
+    const photo = req.user.photo;
     res.render('realTimeProducts', {user, role, photo})
 });
 
@@ -87,9 +93,9 @@ router.get('/carts/:cid', async (req,res)=>{
             price: product.product.price
         }
     })
-    const user = req.session.user;
-    const role = req.session.role;
-    const photo = req.session.photo;
+    const user = req.user.name;
+    const role = req.user.role;
+    const photo = req.user.photo;
     res.render('carts', {cart, cartId, products, user, role, photo})
 })
 

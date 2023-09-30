@@ -17,7 +17,10 @@
                     <ul class="navbar-nav">
                         {{#if user }}
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">Products</a>
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">Manage products</a>
                         </li>
                         {{/if}}
                     </ul>
@@ -34,11 +37,15 @@
                             <img src={{photo}} alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small shadow" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34.4444px);" data-popper-placement="bottom-end">
+                            <li class="dropdown-item">Role: {{role}}</li>
                             <li><a class="dropdown-item" href="/api/auth/signout">Sign out</a></li>
                         </ul>
                     </div>
                     {{else}}
                     <ul class="navbar-nav">
+                        <li>
+                            <a class="nav-link" href="/login">Log in</a>
+                        </li>
                         <li>
                             <a class="nav-link" href="/register">Create account</a>
                         </li>
